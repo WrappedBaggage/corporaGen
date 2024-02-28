@@ -12,6 +12,7 @@ from txt_AI import txt_generator
 from jpg_AI import jpg_generator
 from mail_AI import mail_generator
 
+#Each class object needs to use the create function in order to finish initialization of the object
 class File(ABC):
     def __init__(self, filename, content):
         self.filename = filename
