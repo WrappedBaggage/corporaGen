@@ -9,12 +9,15 @@ client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
 )
 
+#Default model
+model_version = "gpt-3.5-turbo"
+
 def txt_generator(directory: str):
     # Picks a random function from the available in the function list and runs it.
     # The result of the function gets stored in the text variable
-    function_list = [internal_memo, note_to_self]
-    selected_function = random.choice(function_list)
-    text: str = selected_function()
+    prompt_list = [internal_memo, note_to_self]
+    selected_prompt = random.choice(prompt_list)
+    text: str = selected_prompt()
     
     # Creates the filename of the file based on the context of the text variable
     title = make_title(text)
@@ -27,9 +30,9 @@ def txt_generator(directory: str):
     return text, title
 
 
-def internal_memo() -> str:
+def internal_memo(model_version = model_version) -> str:
     chat_completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model=model_version,
     messages=[
         {"role": "system", "content": "You are a internal memo creation program. Your only purpose is to generate generic memo data. "},
         {"role": "user", "content": """Your only purpose is to make internal memos that could be found on post-it notes on the desk of an employee of a big tech company.
@@ -39,9 +42,9 @@ def internal_memo() -> str:
     memo = chat_completion.choices[0].message.content
     return memo
 
-def note_to_self() -> str:
+def note_to_self(model_version = model_version) -> str:
     chat_completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model=model_version,
     messages=[
         {"role": "system", "content": "You are a self reminder note creation program. Your only purpose is to generate believable notes written to one selves. "},
         {"role": "user", "content": """Your only purpose is to make small notes that might have been written as a reminder to yourself,
@@ -56,9 +59,9 @@ def make_title(text:str) -> str:
     chat_completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        {"role": "system", "content": """You are an internal memo summarizer.
+        {"role": "system", "content": """You are an text summarizer.
                                          Your only task is to summarize the internal memo provided in the user prompt.
-                                         You should summarize it to a title of 1-3 words that should describe the memo's content."""},
+                                         You should summarize it to a title of 1-3 words that should describe the content."""},
         {"role": "user", "content": text}
     ]
     )
