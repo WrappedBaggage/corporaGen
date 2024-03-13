@@ -25,7 +25,8 @@ class File(ABC):
 class TxtFile(File):
     def create(self, directory):
         start_time = time.perf_counter()
-        txt_generator(self.filename, directory)
+        text, title = txt_generator(directory)
+        #*text and title is returned here for a potential future implementation of logging
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
@@ -57,7 +58,8 @@ class XlsxFile(File):
 class EmlFile(File):
     def create(self, directory):
         start_time = time.perf_counter()
-        mail_generator(self.filename, directory)
+        text, title = mail_generator(self.filename, directory)
+        #*text and title is returned here for a potential future implementation of logging
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time

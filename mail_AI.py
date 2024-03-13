@@ -57,15 +57,18 @@ def mail_generator(filename, directory):
             msg_body += i + '\n'
 
     msg.set_content(msg_body)
+    text = msg.as_string()
 
     # Define the filename and path
     subject = msg['Subject']
-    filename = re.sub(r'\W+', '_', subject)
-    file_path = os.path.join(directory, f"{filename}.eml")
+    title = re.sub(r'\W+', '_', subject)
+    file_path = os.path.join(directory, f"{title}.eml")
 
     # Save the email message to a file
     with open(file_path, 'w') as eml_file:
-        eml_file.write(msg.as_string())
+        eml_file.write(text)
+        
+    return text, title
 
 if __name__ == '__main__':
     mail_generator()
