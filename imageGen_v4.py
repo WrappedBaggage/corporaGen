@@ -102,15 +102,18 @@ def main():
             file_instance = None
             
             if filetype == "txt":
-                file_instance = TxtFile(filename, content)
+                file_instance, text, title = TxtFile(filename, content)
+                logger.info(f"A .txt file was created with the name {title}")
             elif filetype == "jpg":
                 file_instance = JpgFile(filename, content)
+                logger.info(f"A .jpg file was created with the name {title}")
             elif filetype == "pdf":
                 file_instance = PdfFile(filename, content)
             elif filetype == "xlsx":
                 file_instance = XlsxFile(filename, content)
             elif filetype == "eml":
-                file_instance = EmlFile(filename, content)
+                file_instance, text, title = EmlFile(filename, content)
+                logger.info(f"A .eml file was created with the name {title}")
             
             if file_instance:
                 time_spent = file_instance.create(directory)
