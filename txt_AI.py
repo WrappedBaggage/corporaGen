@@ -24,7 +24,7 @@ def txt_generator(directory: str):
     
     file_path = os.path.join(directory, f"{title}.txt")
     
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding="utf-8") as file:
         file.write(text)
     
     return text, title
