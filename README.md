@@ -16,13 +16,13 @@ As this is meant to be an artifact from a group project, it's capabilities at th
 
 1. Clone the repository:
 
-git clone https://github.com/wrappedbaggage/imageGen.git
+bash git clone https://github.com/wrappedbaggage/imageGen.git
 
 2. Navigate to the project directory:
-cd imageGen
+bash cd imageGen
 
 3. Install the required Python libraries:
-pip install -r requirements.txt
+bash pip install -r requirements.txt
 
 
 ## Usage
@@ -38,4 +38,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 Simen Gåsland, simengasland@gmail.com
 
-Project Link: [https://github.com/wrappedbaggage/imageGen](https://github.com/
+Project Link: [https://github.com/wrappedbaggage/imageGen](https://github.com/wrappedbaggage/imageGen)
