@@ -16,13 +16,13 @@ As this is meant to be an artifact from a group project, it's capabilities at th
 
 1. Clone the repository:
 
-'git clone https://github.com/wrappedbaggage/imageGen.git'
+```git clone https://github.com/wrappedbaggage/imageGen.git```
 
 2. Navigate to the project directory:
-'cd imageGen'
+```cd imageGen```
 
 3. Install the required Python libraries:
-'pip install -r requirements.txt'
+```pip install -r requirements.txt```
 
 
 ## Usage
