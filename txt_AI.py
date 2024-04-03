@@ -21,8 +21,9 @@ def txt_generator(directory, prompt):
     
     # Creates the filename of the file based on the context of the text variable
     title = make_title(text)
-    
-    file_path = os.path.join(directory, f"{title}.txt")
+    print(title)
+    filename = f"{title}.txt"
+    file_path = os.path.join(directory, filename)
     
     with open(file_path, 'w', encoding="utf-8") as file:
         file.write(text)
@@ -71,6 +72,7 @@ def make_title(text:str) -> str:
     
 if __name__ == '__main__':
     directory = "txt_test"
+    prompt = "Potatoes"
     if not os.path.exists(directory):
         os.makedirs(directory)
-    txt_generator(directory)
+    txt_generator(directory, prompt)

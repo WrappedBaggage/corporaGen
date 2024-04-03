@@ -102,7 +102,7 @@ def main():
             
             if filetype == "txt":
                 file_instance = TxtFile(filename, content)
-            elif filetype == "jpg":
+            elif filetype == "png":
                 file_instance = PngFile(filename, content)
             elif filetype == "pdf":
                 file_instance = PdfFile(filename, content)
