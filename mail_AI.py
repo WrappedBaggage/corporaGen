@@ -12,13 +12,13 @@ client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
 )
 
-def mail_generator(filename, directory):
+def mail_generator(directory, prompt):
     # Set the role of the AI and the user request
     chat_completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": "You are a mail content creation program. Your only purpose is to generate generic mail data. "},
-        {"role": "user", "content": "Create content for a mail that could be found on the laptop of an employee of a big tech company. You decide on an appropriate context. The following conditions are very important! First line should contain a mail address, second line should contain a mail address, third line should contain a subject, and the rest should be the contents of the mail, and names need to be made up. The first three lines cannot contain 'to', 'from' or 'subject'"}
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a mail content creation program. Your only purpose is to generate generic mail data. "},
+            {"role": "user", "content": f"Create content for a mail that could be found on the laptop of an employee of a big tech company. You decide on an appropriate context based on this prompt: {prompt}. The following conditions are very important! First line should contain a mail address, second line should contain a mail address, third line should contain a subject, and the rest should be the contents of the mail, and names need to be made up. The first three lines cannot contain 'to', 'from' or 'subject'"}
     ]
     )
 

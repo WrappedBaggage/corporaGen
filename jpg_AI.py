@@ -1,9 +1,13 @@
+#Deprecated code, no longer in use.
+
+
+
 from PIL import Image
 import uuid
 import os
 import random
 
-def jpg_generator(directory):
+def jpg_generator(directory, prompt):
     width, height = 100, 100
     filename = str(uuid.uuid4())[:8]
     file_path = os.path.join(directory, f"{filename}.jpg")

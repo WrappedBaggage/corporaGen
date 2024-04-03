@@ -20,13 +20,14 @@ def sanitize_filname(title):
       sanitized_title = re.sub(invalid_characters, "", title).replace(" ", "_")
       return sanitized_title
 
-def pdf_generator(directory):
+def pdf_generator(directory, prompt):
     chat_completion = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a PDF content creation program. Your only purpose is to generate generic PDF data. "},
-            {"role": "user", "content": """Create data for a PDF that could be found on the laptop of an employee of a big tech company.
+            {"role": "user", "content": f"""Create data for a PDF that could be found on the laptop of an employee of a big tech company.
                 You decide on an appropriate context and names of people, companies or places.
+                The general theme of it should be based on {prompt}.
                 The following conditions are very important! At the start of a line that is a title you need
                 to place a '%' symbol and at the start line that contains a heading you need to place a '&' symbol.
                 Other text does not need symbol at the start of the line. Nothing else should be placed before the '%' or '&' symbols,

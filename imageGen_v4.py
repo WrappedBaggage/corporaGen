@@ -9,8 +9,8 @@ from abc import ABC, abstractmethod
 from pdf_AI import pdf_generator
 from xlsx_AI import xlsx_generator
 from txt_AI import txt_generator
-from jpg_AI import jpg_generator
 from mail_AI import mail_generator
+from png_AI import png_generator
 
 #Each class object needs to use the create function in order to finish initialization of the object
 class File(ABC):
@@ -23,48 +23,48 @@ class File(ABC):
         pass
 
 class TxtFile(File):
-    def create(self, directory):
+    def create(self, directory, prompt):
         start_time = time.perf_counter()
-        txt_generator(directory)
+        txt_generator(directory, prompt)
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
 
-class JpgFile(File):
-    def create(self, directory):
+class PngFile(File):
+    def create(self, directory, prompt):
         start_time = time.perf_counter()
-        jpg_generator(directory)
+        png_generator(self.filename, directory, prompt)
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
 
 class PdfFile(File):
-    def create(self, directory):
+    def create(self, directory, prompt):
         start_time = time.perf_counter()
-        pdf_generator(directory)
+        pdf_generator(directory, prompt)
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
     
 class XlsxFile(File):
-    def create(self, directory):
+    def create(self, directory, prompt):
         start_time = time.perf_counter()
-        xlsx_generator(self.filename, directory)
+        xlsx_generator(self.filename, directory, prompt)
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
 
 class EmlFile(File):
-    def create(self, directory):
+    def create(self, directory, prompt):
         start_time = time.perf_counter()
-        mail_generator(self.filename, directory)
+        mail_generator(directory, prompt)
         end_time = time.perf_counter()
         elapsed_time = end_time - start_time
         return elapsed_time
     
 def main():
     #choice of filetypes
-    filetype_list = ["txt", "jpg", "pdf", "xlsx", "eml"]
+    filetype_list = ["txt", "png", "pdf", "xlsx", "eml"]
     
     #initialize logging
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -74,6 +74,7 @@ def main():
     #User input
     num_files = int(input("How many files do you want to create? "))
     directory = str(input("Target directory "))
+    prompt = str(input("What should the general theme be about?"))
     
     #Checks if directory exists, if not, it is created
     log_dir = os.path.join(directory, 'log')
@@ -102,7 +103,7 @@ def main():
             if filetype == "txt":
                 file_instance = TxtFile(filename, content)
             elif filetype == "jpg":
-                file_instance = JpgFile(filename, content)
+                file_instance = PngFile(filename, content)
             elif filetype == "pdf":
                 file_instance = PdfFile(filename, content)
             elif filetype == "xlsx":
@@ -112,7 +113,7 @@ def main():
 
             
             if file_instance:
-                time_spent = file_instance.create(directory)
+                time_spent = file_instance.create(directory, prompt)
                 files_creation_times.append(time_spent)
     
     end_time = time.perf_counter()
@@ -128,7 +129,7 @@ def main():
 def generate_filename(filetype):
     if filetype == "txt":
         return b"Txt filename is generated based on context within the txt_generator module"
-    elif filetype == "jpg":
+    elif filetype == "png":
         return str(uuid.uuid4())[:8]
     elif filetype == "pdf":
         return b"Pdf filename is generated based on context within the pdf_generator module"
@@ -140,8 +141,8 @@ def generate_filename(filetype):
 def generate_content(filetype):
     if filetype == "txt":
         return b"Txt content is generated using txt_AI.py"
-    elif filetype == "jpg":
-        return b"Image content is generated using jpg_AI.py"
+    elif filetype == "png":
+        return b"Image content is generated using png_AI.py"
     elif filetype == "pdf":
         return b"Pdf content is generated using pdf_AI.py"
     elif filetype == "xlsx":
