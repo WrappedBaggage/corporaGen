@@ -10,6 +10,9 @@ client = OpenAI(
 
 
 def png_generator(filename, directory, prompt):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
     response = client.images.generate(
         model="dall-e-2",
         prompt=prompt,
