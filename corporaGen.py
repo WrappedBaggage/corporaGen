@@ -5,6 +5,7 @@ import logging
 import csv
 import random
 import time
+import pyttsx3
 from abc import ABC, abstractmethod
 from pdf_AI import pdf_generator
 from xlsx_AI import xlsx_generator
@@ -66,10 +67,12 @@ def main():
     #choice of filetypes
     filetype_list = ["txt", "png", "pdf", "xlsx", "eml"]
     
-    #initialize logging
+    #initialize logging and tts instance
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     logger = logging.getLogger(__name__)
     start_time  = time.perf_counter()
+
+    engine = pyttsx3.init()
     
     #User input
     num_files = int(input("How many files do you want to create? "))
@@ -125,6 +128,11 @@ def main():
     logger.info(f"Average file creation time: {avg_time:.2f} seconds")
     elapsed_time = end_time - start_time
     logger.info(f"Finished after {elapsed_time:.2f} seconds")
+    
+    #TTS message to end the program
+    engine.say("Corpora creation completed.")  
+    engine.runAndWait()
+    engine.stop()  
 
 def generate_filename(filetype):
     if filetype == "txt":
