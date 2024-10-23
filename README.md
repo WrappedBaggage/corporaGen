@@ -23,11 +23,14 @@ As this is meant to be an artifact from a group project, it's capabilities at th
 3. Install the required Python libraries:
 ```pip install -r requirements.txt```
 
+4. Make sure to include OpenAI API-key:
+   This needs to be placed in a .env in the project directory
+
 
 ## Usage
 
 To generate content, run the corporaGen.py script.
-You will be prompted to enter how many files you would like to create, and then what target directory you would like the files to be put in. The target directory entered is the relative path from the location that the scripts are located.
+You will be prompted to enter how many files you would like to create, and then what target directory you would like the files to be put in. The target directory entered is the relative path from the location that the scripts are located. Lastly you will be asked to enter a theme. This is what the prompts generating the files will be based upon.
 
 ## License
 
