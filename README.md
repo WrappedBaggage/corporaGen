@@ -6,6 +6,9 @@ corporaGen is a forensic image file generator designed to assist forensic analys
 
 As this is meant to be an artifact from a group project, it's capabilities at this point is fairly barebones. The image generator doesn't acually generate image files, but instead it generates a set amount of random files in the so far supported file formats.
 
+## Demo
+A demo-video showing the program in action can be found here: https://vimeo.com/945285255/1ea6ded24b
+
 ## Features
 
 - **Multiple File Types**: Generate a wide range of filetypes including PNG, PDF, TXT, XLSX, and more in the future.
